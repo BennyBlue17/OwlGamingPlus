@@ -76,7 +76,7 @@ end
 
 local function giveKey(player, vehicleId)
     if not exports.global:hasSpaceForItem(player, 3, vehicleId) then
-        outputChatBox("You do not have any space on you to hold a key.", person, 255, 100, 100)
+        outputChatBox("You do not have any space on you to hold a key.", player, 255, 100, 100)
         return
     end
 
@@ -224,7 +224,7 @@ addEventHandler("floor-bid:submit", resourceRoot, function (data)
     exports.mysql:getConn():query(
         function (handle, player, data)
             local results = handle:poll(0)
-            if not #results == 1 then return end
+            if #results ~= 1 then return end
             local auction = results[1]
             local bid = tonumber(data.bid)
             local characterId = player:getData('dbid')
@@ -303,7 +303,7 @@ addEventHandler("floor-bid:buyout", resourceRoot, function (data)
     exports.mysql:getConn():query(
         function (handle, player)
             local results = handle:poll(0)
-            if not #results == 1 then return end
+            if #results ~= 1 then return end
             local auction = results[1]
             local characterId = player:getData('dbid')
 
